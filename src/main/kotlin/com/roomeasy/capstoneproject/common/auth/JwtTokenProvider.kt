@@ -93,6 +93,13 @@ class JwtTokenProvider(
         return Pair(accessToken, refreshToken)
     }
 
+    fun generateTokenForTest(expiredTime: Long, refreshTokenExpiredTime: Long): Pair<String, String> {
+        val now = System.currentTimeMillis()
+        val refreshToken = generateToken(now, 1, refreshTokenExpiredTime, jwtRefreshSecret)
+        val accessToken = generateToken(now, 1, expiredTime, jwtSecret)
+        return Pair(accessToken, refreshToken)
+    }
+
     private fun generateToken(now: Long, userId: Long, expireTime: Long, secretKey: String): String {
         val expiryDate = Timestamp(now + expireTime * 1000)
 

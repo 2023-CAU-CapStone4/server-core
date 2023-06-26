@@ -26,7 +26,7 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
         return http.csrf().disable()
             .authorizeRequests()
-            .antMatchers("/api/auth/login", "/api/auth/refresh", "/ws-stomp/**")
+            .antMatchers("/api/auth/login", "/api/auth/refresh", "/ws-stomp/**", "/api/test/auth/**")
             .permitAll()
             .antMatchers("ws-stomp/pub/**")
             .authenticated()
